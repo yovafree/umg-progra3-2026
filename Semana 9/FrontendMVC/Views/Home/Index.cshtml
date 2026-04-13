@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-4">Sistema Académico</h1>
+    <p class="lead">Frontend ASP.NET Core MVC integrado con API REST Java (Spring Boot + JPA)</p>
+</div>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h5 class="card-title">Cursos</h5>
+                <p class="card-text">Gestión completa de cursos: crear, editar, eliminar y consultar.</p>
+                <a asp-controller="Cursos" asp-action="Index" class="btn btn-primary">Ver Cursos</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h5 class="card-title">Estudiantes</h5>
+                <p class="card-text">Administración de estudiantes: registro, edición y consultas.</p>
+                <a asp-controller="Estudiantes" asp-action="Index" class="btn btn-success">Ver Estudiantes</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h5 class="card-title">Inscripciones</h5>
+                <p class="card-text">Inscribir estudiantes a cursos y asignar notas finales.</p>
+                <a asp-controller="Inscripciones" asp-action="Index" class="btn btn-warning">Ver Inscripciones</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <h5 class="card-title">Arquitectura</h5>
+        <p><strong>Frontend:</strong> ASP.NET Core MVC (.NET 8) - Puerto 5267</p>
+        <p><strong>Backend:</strong> Spring Boot 3.4 + JPA/Hibernate - Puerto 8080</p>
+        <p><strong>Base de datos:</strong> PostgreSQL (bd_ejemplo)</p>
+        <p class="text-muted mb-0">El frontend consume la API REST de Java mediante HttpClient.</p>
+    </div>
+</div>

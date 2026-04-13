@@ -1,0 +1,50 @@
+@model List<Curso>
+@{
+    ViewData["Title"] = "Cursos";
+}
+
+<h2>Cursos</h2>
+<partial name="_Alerts" />
+
+<p>
+    <a asp-action="Create" class="btn btn-primary btn-sm">Nuevo Curso</a>
+</p>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th>Fecha Creación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            @foreach (var curso in Model)
+            {
+                <tr>
+                    <td>@curso.CodCurso</td>
+                    <td>@curso.NomCurso</td>
+                    <td>
+                        <span class="badge @(curso.Estado == 1 ? "bg-success" : "bg-secondary")">
+                            @curso.EstadoTexto
+                        </span>
+                    </td>
+                    <td>@curso.FecCreacion?.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@curso.CodCurso" class="btn btn-info btn-sm">Ver</a>
+                        <a asp-action="Edit" asp-route-id="@curso.CodCurso" class="btn btn-warning btn-sm">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@curso.CodCurso" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="5" class="text-center text-muted">No hay cursos registrados.</td></tr>
+        }
+    </tbody>
+</table>

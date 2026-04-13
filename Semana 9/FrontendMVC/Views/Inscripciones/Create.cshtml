@@ -1,0 +1,34 @@
+@model InscripcionCreateViewModel
+@{
+    ViewData["Title"] = "Nueva Inscripción";
+}
+
+<h2>Nueva Inscripción</h2>
+<partial name="_Alerts" />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="CodEstudiante" class="form-label"></label>
+                <select asp-for="CodEstudiante" asp-items="ViewBag.Estudiantes" class="form-select">
+                    <option value="">-- Seleccione un estudiante --</option>
+                </select>
+                <span asp-validation-for="CodEstudiante" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CodCurso" class="form-label"></label>
+                <select asp-for="CodCurso" asp-items="ViewBag.Cursos" class="form-select">
+                    <option value="">-- Seleccione un curso --</option>
+                </select>
+                <span asp-validation-for="CodCurso" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-warning">Inscribir</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>

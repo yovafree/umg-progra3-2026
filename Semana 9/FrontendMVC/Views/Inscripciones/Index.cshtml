@@ -1,0 +1,66 @@
+@model List<Inscripcion>
+@{
+    ViewData["Title"] = "Inscripciones";
+}
+
+<h2>Inscripciones</h2>
+<partial name="_Alerts" />
+
+<p>
+    <a asp-action="Create" class="btn btn-warning btn-sm">Nueva Inscripción</a>
+</p>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Estudiante</th>
+            <th>Curso</th>
+            <th>Fecha Inscripción</th>
+            <th>Nota Final</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            @foreach (var insc in Model)
+            {
+                <tr>
+                    <td>@insc.CodInscripcion</td>
+                    <td>@insc.Estudiante?.NombreCompleto</td>
+                    <td>@insc.Curso?.NomCurso</td>
+                    <td>@insc.FecInscripcion?.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        @if (insc.NotaFinal.HasValue)
+                        {
+                            <span class="badge @(insc.NotaFinal >= 61 ? "bg-success" : "bg-danger")">
+                                @insc.NotaFinal.Value.ToString("F1")
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Sin nota</span>
+                        }
+                    </td>
+                    <td>
+                        <span class="badge @(insc.Estado == 1 ? "bg-success" : "bg-secondary")">
+                            @insc.EstadoTexto
+                        </span>
+                    </td>
+                    <td>
+                        <a asp-action="AsignarNota" asp-route-id="@insc.CodInscripcion"
+                           class="btn btn-primary btn-sm">Nota</a>
+                        <a asp-action="Delete" asp-route-id="@insc.CodInscripcion"
+                           class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="7" class="text-center text-muted">No hay inscripciones registradas.</td></tr>
+        }
+    </tbody>
+</table>

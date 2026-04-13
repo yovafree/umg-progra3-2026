@@ -36,7 +36,7 @@ public class Main {
             em.getTransaction().begin();
             Curso cursoActualizar = em.find(Curso.class, 2);
             if (cursoActualizar != null) {
-                cursoActualizar.setNomCurso("Programación III - Actualizado");
+                cursoActualizar.setNomCurso("Programación III - Actualizado 2");
                 cursoActualizar.setEstado(0);
                 em.merge(cursoActualizar);
                 System.out.println("Curso con ID 2 actualizado.");

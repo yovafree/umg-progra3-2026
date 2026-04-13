@@ -1,0 +1,30 @@
+@model Curso
+@{
+    ViewData["Title"] = "Eliminar Curso";
+}
+
+<h2>Eliminar Curso</h2>
+
+<div class="alert alert-warning">
+    ¿Está seguro de que desea eliminar el siguiente curso?
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">ID</dt>
+            <dd class="col-sm-9">@Model.CodCurso</dd>
+
+            <dt class="col-sm-3">Nombre</dt>
+            <dd class="col-sm-9">@Model.NomCurso</dd>
+
+            <dt class="col-sm-3">Estado</dt>
+            <dd class="col-sm-9">@Model.EstadoTexto</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" asp-route-id="@Model.CodCurso" method="post" class="mt-3">
+    <button type="submit" class="btn btn-danger">Confirmar Eliminación</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

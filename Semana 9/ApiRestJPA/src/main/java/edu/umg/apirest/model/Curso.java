@@ -1,9 +1,15 @@
-package edu.umg.consoleapp.model;
+package edu.umg.apirest.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
-import jakarta.persistence.*;
 
+/**
+ * Entidad Curso - mapeada a la tabla "curso" en PostgreSQL.
+ * Reutiliza la misma tabla de la Semana 8.
+ */
 @Entity
 @Table(name = "curso", schema = "public")
 public class Curso implements Serializable {
@@ -11,26 +17,36 @@ public class Curso implements Serializable {
     @Id
     @Column(name = "cod_curso")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codCurso;
+    private Integer codCurso;
 
+    @NotBlank(message = "El nombre del curso es obligatorio")
+    @Size(max = 100, message = "El nombre no puede exceder 100 caracteres")
     @Column(name = "nom_curso", nullable = false)
     private String nomCurso;
 
     @Column(name = "estado")
-    private int estado;
+    private Integer estado;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fec_creacion")
     private Date fecCreacion;
-    
+
     public Curso() {
     }
 
-    public int getCodCurso() {
+    public Curso(String nomCurso, Integer estado) {
+        this.nomCurso = nomCurso;
+        this.estado = estado;
+        this.fecCreacion = new Date();
+    }
+
+    // Getters y Setters
+
+    public Integer getCodCurso() {
         return codCurso;
     }
 
-    public void setCodCurso(int codCurso) {
+    public void setCodCurso(Integer codCurso) {
         this.codCurso = codCurso;
     }
 
@@ -42,11 +58,11 @@ public class Curso implements Serializable {
         this.nomCurso = nomCurso;
     }
 
-    public int getEstado() {
+    public Integer getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(Integer estado) {
         this.estado = estado;
     }
 
@@ -60,6 +76,6 @@ public class Curso implements Serializable {
 
     @Override
     public String toString() {
-        return "ID: " + codCurso + " Nombre: " + nomCurso;
+        return "Curso{codCurso=" + codCurso + ", nomCurso='" + nomCurso + "'}";
     }
 }

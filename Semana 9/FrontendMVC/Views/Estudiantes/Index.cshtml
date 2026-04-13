@@ -1,0 +1,54 @@
+@model List<Estudiante>
+@{
+    ViewData["Title"] = "Estudiantes";
+}
+
+<h2>Estudiantes</h2>
+<partial name="_Alerts" />
+
+<p>
+    <a asp-action="Create" class="btn btn-success btn-sm">Nuevo Estudiante</a>
+</p>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Carnet</th>
+            <th>Email</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            @foreach (var est in Model)
+            {
+                <tr>
+                    <td>@est.CodEstudiante</td>
+                    <td>@est.Nombre</td>
+                    <td>@est.Apellido</td>
+                    <td>@est.Carnet</td>
+                    <td>@est.Email</td>
+                    <td>
+                        <span class="badge @(est.Estado == 1 ? "bg-success" : "bg-secondary")">
+                            @est.EstadoTexto
+                        </span>
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@est.CodEstudiante" class="btn btn-info btn-sm">Ver</a>
+                        <a asp-action="Edit" asp-route-id="@est.CodEstudiante" class="btn btn-warning btn-sm">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@est.CodEstudiante" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="7" class="text-center text-muted">No hay estudiantes registrados.</td></tr>
+        }
+    </tbody>
+</table>
